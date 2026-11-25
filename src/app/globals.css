@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-midnight-ocean: #071F33;
+  --color-deep-atlantic: #0D3B55;
+  --color-ocean-blue: #165D7A;
+  --color-blue-mist: #B7CDD8;
+  --color-pearl: #F5F2EB;
+  --color-champagne: #B9A16B;
+
+  /* Wonder Theme 1:1 Design Tokens */
+  --wt-bg: #ffffff;
+  --wt-surface: #F7F6F3;
+  --wt-text: #1e1b18;
+  --wt-text-muted: #9b9b9b;
+  --wt-border: #e6e3de;
+  --wt-primary: #383531;
+  --wt-primary-hover: #1e1b18;
+  --wt-sale: #6f3434;
+  --wt-radius-btn: 30px;
+}
+
+html {
+  background-color: var(--wt-bg);
+  color: var(--wt-text);
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--wt-bg);
+  color: var(--wt-text);
+  overflow-x: hidden;
+  selection-background-color: var(--color-champagne);
+}
+
+html,
+body,
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+::selection {
+  background-color: rgba(185, 161, 107, 0.28);
+  color: var(--color-midnight-ocean);
+}
+
+/* ============================================================================
+   WONDER THEME 1:1 MICRO-INTERACTIONS & UTILITIES
+   ============================================================================ */
+
+/* 1. Pill Button Fill-on-Hover (Bottom-to-Top Curtain) */
+.wt-btn-fill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  background-clip: padding-box;
+  overflow: hidden;
+  clip-path: inset(0 round 30px);
+  transition: color 0.3s ease-in, border-color 0.3s ease-in-out, background-color 0.3s ease-in;
+}
+
+.wt-btn-fill::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  background: var(--btn-hover-fill, #165D7A);
+  transform: translateY(101%);
+  transition: transform 0.3s ease-in-out;
+  z-index: -1;
+  border-radius: 30px;
+}
+
+.wt-btn-fill:hover::after {
+  transform: translateY(0);
+}
+
+.wt-btn-fill:hover {
+  color: var(--btn-hover-text, #ffffff);
+  border-color: var(--btn-hover-fill, transparent);
+}
+
+/* 2. Card Gallery Dual-Arrow Pill (< | >) Fill-on-Hover */
+.wt-gallery-arrow {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: #ffffff;
+  color: #1e1b18;
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: inset(0px 0px 0px 0px);
+  transition: color 0.25s ease-in, opacity 0.2s ease-out;
+}
+
+.wt-gallery-arrow--prev {
+  border: 1px solid #e6e3de;
+  border-right: 0;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.wt-gallery-arrow--next {
+  border: 1px solid #e6e3de;
+  border-left: 1px solid #e6e3de;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.wt-gallery-arrow::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  background: #383531;
+  transform: translateY(101%);
+  transition: transform 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.wt-gallery-arrow:hover::after {
+  transform: translateY(0);
+}
+
+.wt-gallery-arrow:hover {
+  color: #ffffff;
+}
+
+/* 3. Card Quick-Add Plus (+) Trigger Fill-on-Hover */
+.wt-qbp-trigger {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #e6e3de;
+  border-radius: 30px;
+  background: #ffffff;
+  color: #1e1b18;
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: inset(0 round 30px);
+  transition: color 0.25s ease-in, border-color 0.25s ease-in, opacity 0.2s ease-out;
+}
+
+.wt-qbp-trigger::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  background: #383531;
+  transform: translateY(101%);
+  transition: transform 0.3s ease-in-out;
+  z-index: -1;
+  border-radius: 30px;
+}
+
+.wt-qbp-trigger:hover::after {
+  transform: translateY(0);
+}
+
+.wt-qbp-trigger:hover {
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* 4. Sliding Link Underline (.hero__button--link from Wonder Theme) */
+.wt-link-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wt-link-underline::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: right;
+  transform: scaleX(1);
+  transition: transform 0.4s ease;
+}
+
+.wt-link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s ease 0.3s;
+}
+
+.wt-link-underline:hover::before,
+.group:hover .wt-link-underline::before {
+  transform: scaleX(0);
+}
+
+.wt-link-underline:hover::after,
+.group:hover .wt-link-underline::after {
+  transform: scaleX(1);
+}
+
+/* 5. Tab Underline (.wt-tabs__tab span from Wonder Theme) */
+.wt-tab-label {
+  display: inline-block;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 0% 1px;
+  transition: background-size 0.3s ease-in-out;
+  padding-bottom: 3px;
+}
+
+.wt-tab-btn:hover .wt-tab-label,
+.wt-tab-btn[aria-selected="true"] .wt-tab-label {
+  background-size: 100% 1px;
+}
+
+/* 6. Plus Icon Collapse & Hotspot Ring Pulse (Shoppable / Accordion) */
+.icon-plus-x {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.is-active .icon-plus-x,
+[aria-expanded="true"] .icon-plus-x {
+  transform: scaleY(0);
+}
+
+@keyframes wt-pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  70% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+.wt-pulsate-ring {
+  position: relative;
+}
+
+.wt-pulsate-ring::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  animation: wt-pulsate 2.2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  pointer-events: none;
+}
+
+/* 7. Scroll Reveal Entry & Exit (.scroll-trigger from Wonder Theme) */
+.wt-scroll-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--animation-order, 0) * 65ms);
+  will-change: opacity, transform;
+}
+
+.wt-scroll-reveal--offscreen {
+  opacity: 0;
+  transform: translateY(38px);
+  transition-delay: 0ms;
+}
+
+/* Custom subtle editorial scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-midnight-ocean);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-deep-atlantic);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-champagne);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
